@@ -1,0 +1,86 @@
+/* --- Global CSS Reset & Box Sizing --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: montserrat;
+  color: #333;
+}
+
+/* --- Header Styling --- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #333C4B;
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem; /* Modern spacing between links */
+  margin-right: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #f6f7f9;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #111827;
+}
+
+/* --- Footer Styling --- */
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: #333C4B;
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.footer-links a {
+  color: #94a3b8;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+.logo {
+  display: inline-flex;  /* Aligns contents with flexbox */
+  align-items: center;   /* Centers SVG and text vertically */
+  gap: 0.6rem;           /* Sets the exact space between logo image and text */
+  text-decoration: none;
+  font-family: system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.0rem;
+  color: rgb(255,255,255);
+}
+
+/* Sizing the SVG File */
+.logo-icon {
+  height: 40px;          /* Sets the height of your SVG */
+  width: auto;           /* Automatically keeps the correct aspect ratio */
+  flex-shrink: 0;        /* Prevents the image from squishing on small screens */
+}
+
+.video-hero {
+  width: 100%;
+  margin: 0 auto;    /* Centers the section */
+}
+
+.hero-video {
+  width: 100%;        /* Makes the video responsive */
+  aspect-ratio: 16/9;       /* Preserves aspect ratio */
+  display: block;     /* Removes weird inline spacing underneath */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  cursor: pointer; /* Shows the click pointer cursor */
+}
