@@ -1,23 +1,82 @@
-/* --- Global CSS Reset & Box Sizing --- */
+/* ==========================================================================
+   1. RESETS & CSS VARIABLES
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --header-height: 80px;
+  --primary-color: #0066cc;
+  --text-color: #ece6e5;
+  --bg-color: #ffffff;
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* ==========================================================================
+   2. BASE & TYPOGRAPHY STYLES (Applies to ALL screen sizes)
+   ========================================================================== */
+
 body {
+  width: 100%;
   font-family: montserrat;
-  color: #333;
+  /* Use the full viewport height */
+  min-height: 100dvh; 
+  
+  /* Establish a vertical flexbox layout */
+  display: flex;
+  flex-direction: column;
 }
+
+main {
+flex: 1 ;
+width: 100%;
+}
+
+/* ==========================================================================
+   3. DESKTOP / MAIN LAYOUT STYLES (Default)
+   ========================================================================== */
+
+.slider {
+width: 100%;  
+}
+
+.scroll-target {
+  scroll-margin-top: 100px; /* Adjust based on your header height + extra breathing room */
+}
+
 
 /* --- Header Styling --- */
 .site-header {
+  left: 5px;
+  right:5px;
+  position: sticky;
+  top: 5px;
+  z-index: 1000;
+  
+  height: 80px; /* Define explicit height */
+  margin-bottom: -80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #333C4B;
+
+/*animation*/
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
 }
+
+.site-header.header-hidden {
+  transform: translateY(-100%);
+}
+
+
 
 
 .nav-links {
@@ -28,13 +87,21 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #f6f7f9;
+  color: #ece6e5;
   font-weight: 500;
-  transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
-  color: #111827;
+.glowing {
+  transition: filter 0.2s ease;
+
+}
+
+.glowing:hover {
+  color: #ece6e5;
+    filter: 
+   drop-shadow(0 0 5px #1F51FF) 
+    drop-shadow(0 0 15px #1F51FF) 
+    drop-shadow(0 0 20px #1F51FF);
 }
 
 /* --- Footer Styling --- */
@@ -48,13 +115,33 @@ body {
   font-size: 0.875rem;
 }
 
+
+
 .footer-links a {
   color: #94a3b8;
   margin-left: 1rem;
   text-decoration: none;
 }
 
+
+
+.header_footer {
+margin: 5px;
+background-color: #333c4b;
+background:#333c4be7;
+box-shadow: 0px 1px 30px 1px  rgb(0, 0, 0);
+backdrop-filter: blur(5.4px);
+-webkit-backdrop-filter: blur(5.4px);
+border-radius: 16px;  
+
+}
+
+
+
+
+
 .logo {
+  margin-left: 15px;
   display: inline-flex;  /* Aligns contents with flexbox */
   align-items: center;   /* Centers SVG and text vertically */
   gap: 0.6rem;           /* Sets the exact space between logo image and text */
@@ -67,9 +154,22 @@ body {
 
 /* Sizing the SVG File */
 .logo-icon {
+  fill: #ece6e5;
   height: 40px;          /* Sets the height of your SVG */
   width: auto;           /* Automatically keeps the correct aspect ratio */
   flex-shrink: 0;        /* Prevents the image from squishing on small screens */
+   filter: 
+   drop-shadow(0 0 5px #1F51FF) 
+    drop-shadow(0 0 15px #1F51FF) 
+    drop-shadow(0 0 20px #1F51FF);
+  
+}
+
+.logo-text{
+font-size: 16px;
+font-weight: 400;
+color: #ece6e5;
+  
 }
 
 .video-hero {
@@ -84,3 +184,123 @@ body {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
   cursor: pointer; /* Shows the click pointer cursor */
 }
+
+.hamburger-btn , .mobile-menu{
+  display: none; /* 👈 The menu and button DO NOT exist on desktop */
+}
+
+/* ==========================================================================
+   4. MEDIA QUERIES (Mobile & Tablet Overrides at the very bottom)
+   ========================================================================== */
+
+   @media (max-width: 768px) {
+
+    
+
+   .mobile-menu {
+    display: none;
+    box-shadow: 0px 0px 0px 0px;
+    position: fixed;
+    top: var(--header-height);
+    left: 50%;
+    width: 50%;
+    height: calc(50vh - var(--header-height));
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    opacity: 0;
+    
+    
+    transition: opacity .3s ease-in-out, display .5s ease-in-out allow-discrete;
+    transition-behavior: allow-discrete;
+  }
+
+  .mobile-menu.active {
+    opacity: 100%;
+    display: flex;
+
+  }
+
+  .logo-text{
+  font-size:13px;
+  width: 130px;
+  }
+
+  .nav-links{
+  display: none;  
+  }
+
+
+
+  .site-footer{
+  font-size: 10px;  
+  justify-content: center;
+  }
+
+
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001; /* Above mobile overlay */
+    transition: filter  .2s ease;
+  }
+
+  
+
+  .hamburger-btn .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .hamburger-btn :hover{
+    filter: 
+    drop-shadow(0 0 5px #1F51FF) 
+    drop-shadow(0 0 15px #1F51FF) 
+    drop-shadow(0 0 20px #1F51FF);
+  }
+
+  /* Morph Hamburger into "X" when active */
+  .hamburger-btn.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger-btn.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger-btn.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+
+  /* Mobile Overlay Panel */
+
+  /* Slide in when open */
+
+  .mobile-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .mobile-nav-links a {
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+}
+  
